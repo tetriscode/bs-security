@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright (C) 2016 Open Source Geospatial Foundation. All rights reserved. 
+	This code is licensed under the GPL 2.0 license, available at the root application 
+	directory. -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:sec="http://www.springframework.org/schema/security" xmlns:oauth="http://www.springframework.org/schema/security/oauth2"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+          http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+          http://www.springframework.org/schema/context
+          http://www.springframework.org/schema/context/spring-context-3.0.xsd
+          http://www.springframework.org/schema/security
+          http://www.springframework.org/schema/security/spring-security-3.0.4.xsd
+          http://www.springframework.org/schema/security/oauth2
+          http://www.springframework.org/schema/security/spring-security-oauth2-2.0.xsd">
+
+	<!-- Enable auto-wiring -->
+	<context:annotation-config />
+
+	<!-- Scan for auto-wiring classes in spring saml packages -->
+	<context:component-scan base-package="org.geoserver.security.oauth2" />
+
+  <bean class="org.geoserver.platform.ModuleStatusImpl">
+    <constructor-arg index="0" value="gs-sec-oauth2-generic"/>
+    <constructor-arg index="1" value="GeoServer Security OAuth2"/>
+  </bean>
+  <!-- OAuth2 Security Extension -->
+  <bean id="genericOAuth2TokenServices" class="org.springframework.security.oauth2.provider.token.RemoteTokenServices">
+  </bean>
+  <bean id="genericOAuth2AuthenticationProvider" class="org.geoserver.security.oauth2.GenericOAuth2AuthenticationProvider">
+    <constructor-arg ref="authenticationManager"/>
+    <constructor-arg value="genericOAuth2TokenServices"/>
+    <constructor-arg value="genericOAuth2SecurityConfiguration"/>
+    <constructor-arg value="genericOauth2RestTemplate"/>
+  </bean>
+  <!-- OAuth2 URL Mangler -->
+  <bean id="geoServerOAuth2AccessTokenURLMangler" class="org.geoserver.security.oauth2.OAuth2AccessTokenURLMangler">
+    <constructor-arg ref="authenticationManager"/>
+    <constructor-arg value="genericOAuth2SecurityConfiguration"/>
+    <constructor-arg value="genericOauth2RestTemplate"/>
+  </bean>
+  <!-- wicket ui stuff -->
+  <!-- ui auth provider panel info -->
+  <bean id="genericOAuth2AuthPanelInfo" class="org.geoserver.web.security.oauth2.GenericOAuth2AuthProviderPanelInfo">
+    <property name="id" value="security.GenericOAuth2AuthProvider"/>
+    <property name="shortTitleKey" value="GenericOAuth2AuthProviderPanel.short"/>
+    <property name="titleKey" value="GenericOAuth2AuthProviderPanel.title"/>
+    <property name="descriptionKey" value="GenericOAuth2AuthProviderPanel.description"/>
+  </bean>
+  <!-- login button -->
+  <bean id="genericFormLoginButton" class="org.geoserver.web.LoginFormInfo">
+    <property name="id" value="genericFormLoginButton"/>
+    <property name="titleKey" value=""/>
+    <property name="descriptionKey" value="GenericOAuth2AuthProviderPanel.description"/>
+    <property name="componentClass" value="org.geoserver.web.security.oauth2.GenericOAuth2AuthProviderPanel"/>
+    <property name="name" value="generic"/>
+    <property name="icon" value="generic.png"/>
+    <property name="loginPath" value="web/j_spring_oauth2_login"/>
+  </bean>
+
+</beans>
