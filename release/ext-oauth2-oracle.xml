@@ -1,16 +1,16 @@
 <assembly>
-  <id>sec-oauth2-github-plugin</id>
+  <id>sec-oauth2-oracle-plugin</id>
   <formats>
     <format>zip</format>
   </formats>
   <includeBaseDirectory>false</includeBaseDirectory>
   <fileSets>
     <fileSet>
-      <directory>release/target/dependency</directory>
+      <directory>target/dependency</directory>
       <outputDirectory></outputDirectory>
       <includes>
-        <include>gs-sec-oauth2*</include>
-        <include>gs-sec-oauth2-github*</include>
+        <include>gs-sec-oauth2-core*</include>
+        <include>gs-sec-oauth2-google*</include>
         <include>spring-security*</include>
         <include>spring-security-oauth2*</include>
         <include>commons-codec*</include>
@@ -21,6 +21,20 @@
         <include>spring-aop*</include>
         <include>spring-context*</include>
         <include>spring-webmvc*</include>
+      </includes>
+    </fileSet>
+    <fileSet>
+      <directory>../oauth2/target</directory>
+      <outputDirectory></outputDirectory>
+      <includes>
+        <include>gs-sec-oauth2-ng-*.jar</include>
+      </includes>
+    </fileSet>
+    <fileSet>
+      <directory>../oauth2-oracle/target</directory>
+      <outputDirectory></outputDirectory>
+      <includes>
+        <include>gs-sec-oauth2-oracle-ng-*.jar</include>
       </includes>
     </fileSet>
   </fileSets>
