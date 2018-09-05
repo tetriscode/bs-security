@@ -1,0 +1,19 @@
+Manifest-Version: 1.0
+Application-Name: 
+Implementation-Title: GeoServer Security Community Modules
+Implementation-Version: 2.13-SNAPSHOT
+Build-Timestamp: 31-Aug-2018 14:03
+Archiver-Version: Plexus Archiver
+Built-By: vickdw
+Specification-Vendor: Open Source Geospatial Foundation
+Specification-Title: GeoServer Security Community Modules
+Implementation-Vendor-Id: org.geoserver.community
+GeoServerModule: community
+Project-Version: 2.13-SNAPSHOT
+Implementation-Vendor: Open Source Geospatial Foundation
+Iteration-Name: 
+Git-Revision: 3fc09ae06f250a2b23f641d3b62add2c44aaed13
+Created-By: Apache Maven 3.5.3
+Build-Jdk: 1.8.0_51
+Specification-Version: 2.13-SNAPSHOT
+
