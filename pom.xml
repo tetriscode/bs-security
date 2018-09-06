@@ -9,46 +9,58 @@
   
   <modelVersion>4.0.0</modelVersion>
 
-  <parent>
-    <groupId>org.geoserver</groupId>
-    <artifactId>geoserver</artifactId>
-    <version>2.13-SNAPSHOT</version>
-  </parent>
 
   <groupId>org.geoserver.community</groupId>
-  <artifactId>gs-security</artifactId>
+  <artifactId>gs-security-ng</artifactId>
   <packaging>pom</packaging>
   <version>2.13-SNAPSHOT</version>
   <name>GeoServer Security Community Modules</name>
 
+  <properties>
+    <gs.version>2.13-SNAPSHOT</gs.version>
+    <jackson1.version>1.9.13</jackson1.version>
+    <jackson2.version>2.5.0</jackson2.version>
+    <spring.version>4.3.7.RELEASE</spring.version>
+    <servlet-api.version>3.0.1</servlet-api.version>
+    <fork.javac>true</fork.javac>
+    <javac.maxHeapSize>256m</javac.maxHeapSize>
+  </properties>
+
   <dependencies>
+    <!--<dependency>-->
+      <!--<groupId>org.geoserver</groupId>-->
+      <!--<artifactId>gs-platform</artifactId>-->
+    <!--</dependency>-->
+    <!--<dependency>-->
+      <!--<groupId>javax.servlet</groupId>-->
+      <!--<artifactId>javax.servlet-api</artifactId>-->
+      <!--<scope>provided</scope>-->
+    <!--</dependency>-->
     <dependency>
-      <groupId>org.geoserver</groupId>
-      <artifactId>gs-platform</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>javax.servlet</groupId>
-      <artifactId>javax.servlet-api</artifactId>
-      <scope>provided</scope>
+      <groupId>org.geoserver.community</groupId>
+      <artifactId>gs-sec-oauth2</artifactId>
+      <version>${gs.version}</version>
     </dependency>
   </dependencies>
 
   <build>
     <plugins>
       <plugin>
-        <artifactId>maven-assembly-plugin</artifactId>
-        <version>2.1</version>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>2.3.2</version>
         <configuration>
-          <descriptors>
-            <descriptor>oauth2-google.xml</descriptor>
-            <descriptor>oauth2-github.xml</descriptor>
-            <descriptor>oauth2-geonode.xml</descriptor>
-            <descriptor>oauth2.xml</descriptor>
-          </descriptors>
+          <source>1.8</source>
+          <target>1.8</target>
+          <debug>true</debug>
+          <encoding>UTF-8</encoding>
+          <fork>${fork.javac}</fork>
+          <maxmem>${javac.maxHeapSize}</maxmem>
         </configuration>
       </plugin>
       <plugin>
         <artifactId>maven-jar-plugin</artifactId>
+        <version>2.4</version>
         <executions>
           <execution>
             <phase>package</phase>
@@ -117,9 +129,17 @@
       </modules>
     </profile>
 
-  </profiles>
+  <profile>
+    <id>release</id>
+    <modules>
+      <module>oauth2</module>
+      <!--<module>oauth2-geonode</module>-->
+      <module>oauth2-github</module>
+      <module>oauth2-google</module>
+      <module>oauth2-oracle</module>
+      <module>release</module>
+    </modules>
+  </profile>
+</profiles>
 
-  <modules>
-    <!-- module>web</module -->
-  </modules>
 </project>

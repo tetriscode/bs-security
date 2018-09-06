@@ -1,5 +1,5 @@
 <assembly>
-  <id>sec-oauth2-geonode-plugin</id>
+  <id>sec-oauth2-plugin</id>
   <formats>
     <format>zip</format>
   </formats>
@@ -10,7 +10,6 @@
       <outputDirectory></outputDirectory>
       <includes>
         <include>gs-sec-oauth2*</include>
-        <include>gs-sec-oauth2-geonode*</include>
         <include>spring-security*</include>
         <include>spring-security-oauth2*</include>
         <include>commons-codec*</include>
@@ -21,6 +20,13 @@
         <include>spring-aop*</include>
         <include>spring-context*</include>
         <include>spring-webmvc*</include>
+      </includes>
+    </fileSet>
+    <fileSet>
+      <directory>../oauth2/target</directory>
+      <outputDirectory></outputDirectory>
+      <includes>
+        <include>gs-sec-oauth2-ng-*.jar</include>
       </includes>
     </fileSet>
   </fileSets>
