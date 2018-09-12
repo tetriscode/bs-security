@@ -9,11 +9,9 @@
       <directory>target/dependency</directory>
       <outputDirectory></outputDirectory>
       <includes>
-        <include>gs-sec-oauth2*</include>
         <include>spring-security*</include>
         <include>spring-security-oauth2*</include>
         <include>commons-codec*</include>
-        <include>jackson*</include>
         <include>jettison*</include>
         <include>json*</include>
         <include>org.json*</include>
@@ -26,7 +24,7 @@
       <directory>../oauth2/target</directory>
       <outputDirectory></outputDirectory>
       <includes>
-        <include>gs-sec-oauth2-ng-*.jar</include>
+        <include>gs-sec-oauth2-ng-2.13-SNAPSHOT.jar</include>
       </includes>
     </fileSet>
   </fileSets>

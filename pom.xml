@@ -4,9 +4,10 @@
  This code is licensed under the GPL 2.0 license, available at the root
  application directory.
  -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-  
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
   <modelVersion>4.0.0</modelVersion>
 
 
@@ -15,6 +16,12 @@
   <packaging>pom</packaging>
   <version>2.13-SNAPSHOT</version>
   <name>GeoServer Security Community Modules</name>
+
+  <parent>
+    <groupId>org.geoserver</groupId>
+    <artifactId>community</artifactId>
+    <version>2.13-SNAPSHOT</version>
+  </parent>
 
   <properties>
     <gs.version>2.13-SNAPSHOT</gs.version>
@@ -27,20 +34,21 @@
   </properties>
 
   <dependencies>
-    <!--<dependency>-->
-      <!--<groupId>org.geoserver</groupId>-->
-      <!--<artifactId>gs-platform</artifactId>-->
-    <!--</dependency>-->
-    <!--<dependency>-->
-      <!--<groupId>javax.servlet</groupId>-->
-      <!--<artifactId>javax.servlet-api</artifactId>-->
-      <!--<scope>provided</scope>-->
-    <!--</dependency>-->
     <dependency>
-      <groupId>org.geoserver.community</groupId>
-      <artifactId>gs-sec-oauth2</artifactId>
+      <groupId>org.geoserver</groupId>
+      <artifactId>gs-platform</artifactId>
       <version>${gs.version}</version>
     </dependency>
+    <!--<dependency>-->
+    <!--<groupId>javax.servlet</groupId>-->
+    <!--<artifactId>javax.servlet-api</artifactId>-->
+    <!--<scope>provided</scope>-->
+    <!--</dependency>-->
+    <!--<dependency>-->
+    <!--<groupId>org.geoserver.community</groupId>-->
+    <!--<artifactId>gs-sec-oauth2-ng</artifactId>-->
+    <!--<version>${gs.version}</version>-->
+    <!--</dependency>-->
   </dependencies>
 
   <build>
@@ -97,7 +105,7 @@
         <module>oauth2-google</module>
       </modules>
     </profile>
-    
+
     <profile>
       <id>oauth2-github</id>
       <modules>
@@ -129,17 +137,43 @@
       </modules>
     </profile>
 
-  <profile>
-    <id>release</id>
-    <modules>
-      <module>oauth2</module>
-      <!--<module>oauth2-geonode</module>-->
-      <module>oauth2-github</module>
-      <module>oauth2-google</module>
-      <module>oauth2-oracle</module>
-      <module>release</module>
-    </modules>
-  </profile>
-</profiles>
+    <profile>
+      <id>release</id>
+      <modules>
+        <module>oauth2</module>
+        <!--<module>oauth2-geonode</module>-->
+        <module>oauth2-github</module>
+        <module>oauth2-google</module>
+        <module>oauth2-oracle</module>
+        <module>release</module>
+      </modules>
+    </profile>
+  </profiles>
+
+  <repositories>
+    <repository>
+      <id>Boundless Release</id>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+      <name>libs-release</name>
+      <url>http://repo.boundlessgeo.com/artifactory/release</url>
+    </repository>
+    <repository>
+      <snapshots/>
+      <id>Boundless Snapshots</id>
+      <name>libs-snapshot</name>
+      <url>http://repo.boundlessgeo.com/artifactory/snapshot</url>
+    </repository>
+    <repository>
+      <id>central</id>
+      <name>Central Repository</name>
+      <url>http://repo.maven.apache.org/maven2</url>
+      <layout>default</layout>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+    </repository>
+  </repositories>
 
 </project>

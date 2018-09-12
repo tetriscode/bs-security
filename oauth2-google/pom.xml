@@ -42,7 +42,7 @@
 
 		<dependency>
 			<groupId>org.geoserver.community</groupId>
-			<artifactId>gs-sec-oauth2</artifactId>
+			<artifactId>gs-sec-oauth2-ng</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 
@@ -54,7 +54,7 @@
 
 		<dependency>
 			<groupId>org.geoserver.community</groupId>
-			<artifactId>gs-sec-oauth2</artifactId>
+			<artifactId>gs-sec-oauth2-ng</artifactId>
 			<version>${project.version}</version>
 			<classifier>tests</classifier>
 			<scope>test</scope>

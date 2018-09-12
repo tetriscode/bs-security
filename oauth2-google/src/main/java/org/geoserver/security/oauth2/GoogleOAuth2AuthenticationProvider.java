@@ -38,10 +38,10 @@ public class GoogleOAuth2AuthenticationProvider extends GeoServerOAuthAuthentica
     public Class<? extends GeoServerSecurityFilter> getFilterClass() {
         return GoogleOAuthAuthenticationFilter.class;
     }
-    
+
     @Override
     public GeoServerSecurityFilter createFilter(SecurityNamedServiceConfig config) {
-        return new GoogleOAuthAuthenticationFilter(config, tokenServices,
-                oauth2SecurityConfiguration, geoServerOauth2RestTemplate);
+        return new GoogleOAuthAuthenticationFilter(
+                config, tokenServices, oauth2SecurityConfiguration, geoServerOauth2RestTemplate);
     }
 }
