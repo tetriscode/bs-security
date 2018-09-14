@@ -5,91 +5,98 @@
  application directory.
  -->
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
- <modelVersion>4.0.0</modelVersion>
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
 
   <parent>
     <groupId>org.geoserver.community</groupId>
     <artifactId>gs-security-ng</artifactId>
     <version>2.13-SNAPSHOT</version>
+    <relativePath>..</relativePath>
   </parent>
 
- <groupId>org.geoserver.community</groupId>
- <artifactId>gs-security-release-ng</artifactId>
- <packaging>jar</packaging>
- <name>GeoServer Community Security NG Release Module</name>
+  <groupId>org.geoserver.community</groupId>
+  <artifactId>gs-security-release-ng</artifactId>
+  <packaging>jar</packaging>
+  <name>GeoServer Community Security NG Release Module</name>
 
-
- <build>
-  <plugins>
-   <plugin>
-    <artifactId>maven-dependency-plugin</artifactId>
-    <executions>
-     <execution>
-      <id>copy-dependencies</id>
-      <phase>package</phase>
-      <goals>
-       <goal>copy-dependencies</goal>
-      </goals>
-      <configuration>
-       <includeGroupIds>org.springframework,commons-codec,org.codehaus.jackson,com.fasterxml.jackson,net.sf.json-lib,org.geoserver.community.security.oauth2</includeGroupIds>
-       <includeArtifactIds></includeArtifactIds>
-      </configuration>
-     </execution>
-    </executions>
-   </plugin>
-   <plugin>
-    <artifactId>maven-assembly-plugin</artifactId>
-    <version>2.1</version>
-    <configuration>
-     <descriptors>
-      <descriptor>ext-oauth2-google.xml</descriptor>
-      <descriptor>ext-oauth2-github.xml</descriptor>
-      <descriptor>ext-oauth2-oracle.xml</descriptor>
-      <!--<descriptor>oauth2-geonode.xml</descriptor>-->
-      <descriptor>ext-oauth2.xml</descriptor>
-     </descriptors>
-    </configuration>
-    <executions>
-     <execution>
-      <phase>package</phase>
-      <goals>
-       <goal>single</goal>
-      </goals>
-     </execution>
-    </executions>
-   </plugin>
-   <plugin>
-    <artifactId>maven-dependency-plugin</artifactId>
-    <executions>
-     <execution>
-      <phase>install</phase>
-      <goals>
-       <goal>copy-dependencies</goal>
-      </goals>
-     </execution>
-    </executions>
-   </plugin>
-   <plugin>
-    <artifactId>maven-antrun-plugin</artifactId>
-    <executions>
-     <execution>
-      <phase>install</phase>
-      <configuration>
-      <!-- remove some unwanted dependencies that get pulled over -->
-       <tasks>
-        <delete>
-         <fileset dir="${project.build.directory}/dependency" includes="servlet-api-*.jar,core*.jar"/>
-        </delete>
-       </tasks>
-      </configuration>
-      <goals>
-       <goal>run</goal>
-      </goals>
-     </execution>
-    </executions>
-   </plugin>
-  </plugins>
- </build>
+  <dependencies>
+    <dependency>
+      <groupId>org.geoserver.community</groupId>
+      <artifactId>gs-sec-oauth2-ng</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.geoserver.community</groupId>
+      <artifactId>gs-sec-oauth2-github-ng</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.geoserver.community</groupId>
+      <artifactId>gs-sec-oauth2-google-ng</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.geoserver.community</groupId>
+      <artifactId>gs-sec-oauth2-oracle-ng</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+  </dependencies>
+  <build>
+    <plugins>
+      <plugin>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <executions>
+          <execution>
+            <phase>prepare-package</phase>
+            <goals>
+              <goal>copy-dependencies</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <artifactId>maven-antrun-plugin</artifactId>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <configuration>
+              <!-- remove some unwanted dependencies that get pulled over -->
+              <tasks>
+                <delete>
+                  <fileset dir="${project.build.directory}/dependency"
+                           includes="servlet-api-*.jar,core*.jar"/>
+                </delete>
+              </tasks>
+            </configuration>
+            <goals>
+              <goal>run</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <version>2.1</version>
+        <configuration>
+          <descriptors>
+            <descriptor>ext-oauth2-google.xml</descriptor>
+            <descriptor>ext-oauth2-github.xml</descriptor>
+            <descriptor>ext-oauth2-oracle.xml</descriptor>
+            <!--<descriptor>oauth2-geonode.xml</descriptor>-->
+            <descriptor>ext-oauth2.xml</descriptor>
+          </descriptors>
+        </configuration>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>single</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
 </project>

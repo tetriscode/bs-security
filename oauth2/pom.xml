@@ -11,6 +11,7 @@
 		<groupId>org.geoserver.community</groupId>
 		<artifactId>gs-security-ng</artifactId>
 		<version>2.13-SNAPSHOT</version>
+		<relativePath>..</relativePath>
 	</parent>
 
 	<groupId>org.geoserver.community</groupId>
